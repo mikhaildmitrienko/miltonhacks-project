@@ -13,7 +13,7 @@ function init() {
         console.log(document.documentElement.scrollTop)
         topBG.backgroundPositionY = -(document.documentElement.scrollTop/10) + "px";;
         if(document.documentElement.scrollTop>=450){
-            navTop.backgroundColor = "#e9e9e9";
+            navTop.backgroundColor = "#e9e9e9bd";
         }
         else{
             navTop.backgroundColor = "transparent";
