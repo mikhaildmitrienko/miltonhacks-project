@@ -23,8 +23,6 @@ exports.yelp = functions.https.onRequest((req, res) => {
   })
 
 
-
-
 exports.accountCreate = functions.auth.user().onCreate(user => {
     console.log(user.uid);
     const userDoc = {
