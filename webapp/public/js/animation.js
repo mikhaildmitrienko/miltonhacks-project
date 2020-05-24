@@ -7,7 +7,7 @@ function homeAnimationInit() {
     window.onscroll = function () { scrollFunction(); };
     function scrollFunction() {
         var scrollTop = document.documentElement.scrollTop;
-        topBG.backgroundPositionY = -(scrollTop / 8) + "px";;
+        topBG.backgroundPositionY = -(scrollTop / 3) + "px";;
         if (scrollTop / window.innerHeight >= 0.01) {
             navTop.backgroundColor = "#ffffff";
         }
