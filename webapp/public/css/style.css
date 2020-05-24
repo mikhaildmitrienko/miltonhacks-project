@@ -61,6 +61,9 @@ body::-webkit-scrollbar {
     /* background-image: url("../img/restaurant.jpg"); */        
     background-image: url("../img/fudk.svg");
     background-size: contain;
+    background-repeat:no-repeat;
+    
+    background-attachment: fixed;
     /* background-position: center center; */
     /* background-size: cover; */
 }
@@ -111,5 +114,10 @@ body::-webkit-scrollbar {
     top: 100%;
     left: 0%;
     /* background-image: linear-gradient(to bottom right, #f4c4f3,#fc67fa); */
-    background: white;
+    background: rgb(20, 20, 20);
+    color: white;
+}
+
+.page-2 h1{
+    margins: 11vh 10vw;
 }

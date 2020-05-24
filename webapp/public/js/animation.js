@@ -11,9 +11,9 @@ function init() {
     window.onscroll = function () { scrollFunction(); };
     function scrollFunction() {
         console.log(document.documentElement.scrollTop)
-        topBG.backgroundPositionY = -(document.documentElement.scrollTop/10) + "px";;
+        topBG.backgroundPositionY = -(document.documentElement.scrollTop/8) + "px";;
         if(document.documentElement.scrollTop>=450){
-            navTop.backgroundColor = "#e9e9e9bd";
+            navTop.backgroundColor = "#ffffff";
         }
         else{
             navTop.backgroundColor = "transparent";
