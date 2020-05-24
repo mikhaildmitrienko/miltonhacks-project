@@ -16,6 +16,8 @@ html,
 body {
     margin: 0;
     padding: 0;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 body::-webkit-scrollbar {
@@ -59,13 +61,24 @@ body::-webkit-scrollbar {
     left: 0%; */
     /* background-image: linear-gradient(to bottom right, #f4c4f3,#fc67fa); */
     /* background-image: url("../img/restaurant.jpg"); */        
-    background-image: url("../img/fudk.svg");
+    background-image: url("../img/home.svg");
     background-size: contain;
     background-repeat:no-repeat;
     
     background-attachment: fixed;
     /* background-position: center center; */
     /* background-size: cover; */
+}
+
+.page-1 h1{
+    margin: 30vh 35vw;
+    width: 100vw;
+    font-size: 2.8rem;
+}
+
+.page-1 h2{
+    margin: -17vw 50vw;
+    width: 100vw;
 }
 
 .nav-buttons{
@@ -86,7 +99,7 @@ body::-webkit-scrollbar {
 }
 
 .nav-button:hover{
-    background-color: rgb(255, 0, 200);
+    background-color: #F411EE;
     color: white;
     color: rgb(225, 225, 225);
     
@@ -114,10 +127,47 @@ body::-webkit-scrollbar {
     top: 100%;
     left: 0%;
     /* background-image: linear-gradient(to bottom right, #f4c4f3,#fc67fa); */
-    background: rgb(20, 20, 20);
+    background: rgb(30, 30, 30);
     color: white;
 }
 
 .page-2 h1{
-    margins: 11vh 10vw;
+    margin: 26vh 10vw;
+}
+/* 
+.content{
+    width: 100%;
+} */
+
+.sign-in-with-google{
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+    text-align: center;
+    padding: 15px;
+    background-color: white;
+    border-radius: 100vw;
+    border: solid rgb(206, 206, 206);
+    border-width: 1px 1px;
+    font-family: 'Roboto';
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: grey;
+    cursor: pointer;
+
+    margin: auto;
+}
+
+.sign-in-text{
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.google-login-logo{
+    margin-right:30px;
 }

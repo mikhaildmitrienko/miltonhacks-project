@@ -1,28 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Date Maker - Login</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Date Maker</title>
+    <!-- import signin -->
+    <script src="./js/sign_in.js" async></script>
+    <script src="./js/animation.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="js/firebaseCfg.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://use.typekit.net/amg5vcb.css">
 
     <link rel="stylesheet" type="text/css" href="./css/style.css">
     <link rel="stylesheet" type="text/css" href="./css/fonts.css">
     <link rel="stylesheet" type="text/css" href="./css/header.css">
+
+    <!-- define page load functions -->
+    <script>
+        window.onload = function () {
+            initSignIn(function () {
+                console.log(window.location);
+                window.location.replace(
+                    sessionStorage.lastURL || "index.html"
+                );
+            });
+        };
+    </script>
+    
 </head>
+
 <body>
-    <div class="container">
-        <div class="header" id="navigation-top">
-            <h1>Date Maker</h1>
-            <div class="nav-buttons">
-                <div class="nav-button">Login</div>
-                <div class="nav-button">Find a Place</div>
-            </div>
-        </div>
+    <script>document.body.className += ' fade-out';</script>
+    <div id="login-screen">
+        <button onclick="signIn()" class = "sign-in-with-google">
+            <img src="img/google.png" height="30px" class="google-login-logo">
+            <span class="sign-in-text">Sign in with Google</span>
+        </button>
     </div>
+    
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
+
+    <script src="js/firebaseCfg.js"></script>
+    
 </body>
+
 </html>

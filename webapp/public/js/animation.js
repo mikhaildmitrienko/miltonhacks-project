@@ -8,14 +8,16 @@ function init() {
     document.body.classList.remove('fade-out');
     var navTop = document.getElementById("navigation-top").style;
     var topBG = document.getElementById("top-bg").style;
+    document.getElementById("nav-title").addEventListener("click", function(){window.location.replace("index.html")});
+    // document.getElementById("nav-title").addEventListener("click", function(){window.location.replace("login.html")});
     window.onscroll = function () { scrollFunction(); };
     function scrollFunction() {
-        console.log(document.documentElement.scrollTop)
-        topBG.backgroundPositionY = -(document.documentElement.scrollTop/8) + "px";;
-        if(document.documentElement.scrollTop>=450){
+        var scrollTop = document.documentElement.scrollTop;
+        topBG.backgroundPositionY = -(scrollTop / 8) + "px";;
+        if (scrollTop / window.innerHeight >= 0.01) {
             navTop.backgroundColor = "#ffffff";
         }
-        else{
+        else {
             navTop.backgroundColor = "transparent";
         }
     }

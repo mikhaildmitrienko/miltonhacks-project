@@ -6,8 +6,8 @@
     projectId: "miltonhacksii",
     storageBucket: "miltonhacksii.appspot.com",
     messagingSenderId: "561093652964",
-    appId: "1:561093652964:web:eadcebdd97e1da7b64d7f1",
-    measurementId: "G-10Z82ZNDH2"
+    appId: "1:561093652964:web:3b0e52a4d06a791d64d7f1",
+    measurementId: "G-G4SDHZY6HZ"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);

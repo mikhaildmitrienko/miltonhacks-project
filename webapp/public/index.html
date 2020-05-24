@@ -4,25 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Finder</title>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+    <title>Date Maker</title>
 
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-analytics.js"></script>
-
+    <script src="./js/sign_in.js"></script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-    <script src="js/firebaseCfg.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://use.typekit.net/amg5vcb.css">
 
     <link rel="stylesheet" type="text/css" href="./css/style.css">
     <link rel="stylesheet" type="text/css" href="./css/fonts.css">
     <link rel="stylesheet" type="text/css" href="./css/header.css">
-
-
 </head>
 
 <body>
@@ -30,16 +23,16 @@
     <!-- <div id="black-fade-out"></div> -->
     <div class="container">
         <div class="header" id="navigation-top">
-            <h1>Date Maker</h1>
+            <h1 id="nav-title">Date Maker</h1>
             <div class="nav-buttons">
-                <div class="nav-button">Login</div>
+                <div class="nav-button" onclick="window.location.replace('login.html')">Login</div>
                 <div class="nav-button">Find a Place</div>
             </div>
         </div>
         <div class="content">
             <div class="page-1" id="top-bg">
-                <h1 class="main-title"></h1>
-                <img src="http://your-image.jpg" style="visibility: hidden;" />
+                <h1 class="main-title">Welcome to Date Maker!</h1>
+                <h2 class="main-subtitle">A new way to plan dining</h2>
             </div>
             <div class="page-2">
                 <h1>Find a Restaurant</h1>
@@ -47,6 +40,16 @@
         </div>
     </div>
     <script src="js/animation.js"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
+
+    <script src="js/firebaseCfg.js"></script>
 </body>
 
 </html>
