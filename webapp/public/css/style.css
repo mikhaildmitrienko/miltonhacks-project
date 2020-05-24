@@ -59,7 +59,7 @@ body::-webkit-scrollbar {
     left: 0%;
     /* background-image: linear-gradient(to bottom right, #f4c4f3,#fc67fa); */
     /* background-image: url("../img/restaurant.jpg"); */        
-    background-image: url("../img/fudk.svg");
+    background-image: url("../img/fudk.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     /* background-size: cover; */
