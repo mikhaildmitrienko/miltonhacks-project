@@ -145,7 +145,7 @@ body::-webkit-scrollbar {
     left: 50%;
     top: 50%;
     text-align: center;
-    padding: 15px;
+    padding: 10px 15px;
     background-color: white;
     border-radius: 100vw;
     border: solid rgb(206, 206, 206);
@@ -155,19 +155,18 @@ body::-webkit-scrollbar {
     margin-bottom: 20px;
     color: grey;
     cursor: pointer;
-
+    outline: none;
     margin: auto;
 }
 
+.sign-in-with-google .container{
+    display: flex;
+}
+
 .sign-in-text{
-    margin: 0;
-    padding: 0;
-    position: relative;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+    padding-top: 3px;
 }
 
 .google-login-logo{
-    margin-right:30px;
+    margin-right:20px;
 }

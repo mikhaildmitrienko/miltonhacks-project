@@ -1,10 +1,4 @@
-window.onload = function () {
-    init()
-};
-
-// document.getElementById("black-fade-out").style.backgroundColor="transparent";
-
-function init() {
+function homeAnimationInit() {
     document.body.classList.remove('fade-out');
     var navTop = document.getElementById("navigation-top").style;
     var topBG = document.getElementById("top-bg").style;
@@ -21,7 +15,10 @@ function init() {
             navTop.backgroundColor = "transparent";
         }
     }
+}
 
+function loginAnimationInit() {
+    document.body.classList.remove('fade-out');
 }
 
 

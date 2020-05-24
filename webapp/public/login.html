@@ -21,6 +21,7 @@
     <!-- define page load functions -->
     <script>
         window.onload = function () {
+            loginAnimationInit()
             initSignIn(function () {
                 console.log(window.location);
                 window.location.replace(
@@ -36,8 +37,10 @@
     <script>document.body.className += ' fade-out';</script>
     <div id="login-screen">
         <button onclick="signIn()" class = "sign-in-with-google">
-            <img src="img/google.png" height="30px" class="google-login-logo">
-            <span class="sign-in-text">Sign in with Google</span>
+            <div class="container">
+                <img src="img/google.png" height="30px" class="google-login-logo">
+                <span class="sign-in-text">Sign in with Google</span>
+            </div>
         </button>
     </div>
     
