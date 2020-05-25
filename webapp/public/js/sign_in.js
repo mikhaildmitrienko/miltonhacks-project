@@ -2,13 +2,14 @@ var _provider;
 var loggedInUser;
 
 function initSignIn(onSignInFunc) {
+    // alert(window.location.pathname + window.location.search);
     _provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             loggedInUser = user;
             if (onSignInFunc) onSignInFunc(true);
         } else {
-            if (window.location.href.slice(-10) != "login.html") {
+            if (!(window.location.pathname + window.location.search).includes("login.html") && document.getElementById("this-is-the-login-page") === null && document.getElementById("login-page") === null) {
                 sessionStorage.lastURL = window.location.href;
                 window.location.replace(
                     "login.html"
