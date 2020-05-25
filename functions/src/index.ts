@@ -84,7 +84,7 @@ export const yelpDocRequest = functions.firestore
                 .where("email", "==", matchData.to).limit(1).get()
                 .then((toSnapshot) => {
                     if (!toSnapshot.empty) {
-                        const returnedRestaurant = getYelpRequest(matchData.fromLat, matchData.fromLong);
+                        const returnedRestaurant = getYelpRequest(matchData.foodType, matchData.fromLat, matchData.fromLong);
                         return snapshot.ref.update({
                             results: 20,
                             toLat: toSnapshot.docs[0].data().addressLat,
@@ -126,24 +126,24 @@ export const yelpDocRequest = functions.firestore
 
 const apiKey = 'h-1yi4jHs4kNaYbifUTJdVU4o7-qCBih--cCJgBnjY8a18ShGf_FRl0o_IwxUHt0VOHmXgV6ehSk5_Nx8ERhyHH08-Fbx1o1bDVQE-Ka0gTs_GF868Q95o-S6MvKXnYx';
 
-function getYelpRequest(lat: String, long: String) {
+function getYelpRequest(keyword: String, lat: String, long: String) {
     const searchRequest = {
-        term: 'Coffee',
+        term: keyword,
         latitude: +lat,
         longitude: +long,
     };
     const client = yelp.client(apiKey);
 
-    var result;
+    var result = ["Did not request."];
 
     client.search(searchRequest).then((response: any) => {
         const firstResult = response.jsonBody.businesses[0];
         const prettyJson = JSON.stringify(firstResult, null, 4);
-        result = prettyJson;
+        result = response.jsonBody.businesses;
         console.log(prettyJson);
     }).catch((e: any) => {
         console.log(e);
-        result = {};
+        result = ["no results found"];
     });
     return result;
 }
@@ -169,9 +169,9 @@ export const distance_finder = functions.https.onRequest((req, res) => {
     }
 
     if (req.query.id === '1') {
-        res.send(JSON.stringify(restuarants1));
+        res.status(200).json(restuarants1);
     } else {
-        res.send(JSON.stringify(restuarants2));
+        res.status(200).json(restuarants2);
     }
 
     return admin.firestore().collection('matches').add(matchDoc);
@@ -201,7 +201,7 @@ export const accountCreate = functions.auth.user().onCreate(user => {
     const userDoc = {
         'email': user.email,
         'displayName': user.displayName,
-        'address': ' ',
+        'address': '[address]',
         'addressLat': '',
         'addressLong': '',
         'interests': []

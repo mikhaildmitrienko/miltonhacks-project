@@ -33,6 +33,18 @@ function fillProfile(loggedIn) {
     }
 }
 
+function signOut(){
+    firebase.auth().signOut().then(function() {
+      }, function(error) {
+      });
+}
+
+function makeSignOutButton(success){
+    document.getElementById("sign-out").addEventListener("click",()=>{
+        signOut();
+    })
+}
+
 function addInterest(item) {
     document.getElementById("interests").innerHTML +=
         '<span class="interest">' + item + '</span>';
