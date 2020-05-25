@@ -105,10 +105,10 @@ export const yelpDocRequest = functions.firestore
                         to:'error_in_cloud_functions_103@gmail.com'
                     });
                 });
-                // return snapshot.ref.update({
-                //     results: 30,
-                //     to:'error_in_cloud_functions_108@gmail.com'
-                // });
+                return snapshot.ref.update({
+                    results: 30,
+                    // to:'error_in_cloud_functions_108@gmail.com'
+                });
         }
         else {
             return null;
