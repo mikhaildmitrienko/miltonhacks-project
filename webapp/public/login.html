@@ -35,7 +35,10 @@
 
 <body>
     <script>document.body.className += ' fade-out';</script>
+    
     <div id="login-screen">
+        <div id="insert-header"></div>
+
         <button onclick="signIn()" class = "sign-in-with-google">
             <div class="container">
                 <img src="img/google.png" height="30px" class="google-login-logo">
@@ -52,6 +55,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
 
+    <script src="js/insertHeader.js"></script>
     <script src="js/firebaseCfg.js"></script>
     
 </body>

@@ -35,17 +35,7 @@
 
 <body>
     <div class="discover-page">
-        <div class="header" id="navigation-top">
-            <h1 id="nav-title">Date Maker</h1>
-            <div class="nav-buttons">
-                <div class="container">
-                    <div class="nav-button" onclick="window.location.replace('discover.html')">Find a Place</div>
-                </div>
-                <div class="account-button" onclick="window.location.replace('profile.html')">
-                    <img id="profile-pic" hidden=true>
-                </div>
-            </div>
-        </div>
+        <div id="insert-header"></div>
         <h1 id="title">Discover</h1>
         <div class="container" id="replaceable">
             <div class="form">
@@ -64,6 +54,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
 
+    <script src="js/insertHeader.js"></script>
     <script src="js/firebaseCfg.js"></script>
     <script src="js/profile_fill.js"></script>
     <script src="js/result.js"></script>
