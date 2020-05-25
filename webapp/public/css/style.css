@@ -221,25 +221,49 @@ body::-webkit-scrollbar {
 #username{
     font-weight: 700;
     font-size: 30px;
-    margin: 25px 0
+    margin: 5px 10px;
 }
 
 #email{
-    margin: 15px 0;
     font-weight: 500;
     font-size: 20px;
+    padding: 10px;
 }
 
 #address{
     font-weight: 500;
     font-size: 20px;
-    margin-top: 15px;
+    margin-top: 0px;
     border-radius: 10px;
+    padding: 10px;
+    text-align: left;
+}
+
+#address:focus{
+    outline:none;
+    overflow:hidden;
+}
+
+#address:hover{
+    background-color: rgb(226, 226, 226);
+}
+
+#enter-to-submit{
+    margin-top: 0px;
+    margin-left: 10px;
+    font-size: 10px;
+    opacity: 0;
 }
 
 #coordinates{
+    margin-top: 5px;
     margin-bottom: 15px;
+    margin-left: 10px;
     font-size: 12px;
+}
+
+#interests{
+    padding:10px;
 }
 
 .interest{

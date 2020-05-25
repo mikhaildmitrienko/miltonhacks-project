@@ -59,25 +59,26 @@ function requestMatch() {
     matchCollectionRef = firestore.collection("matches");
     userDocRef.get().then(function (doc) {
         userData = doc.data();
-        console.log("match requested by " + loggedInUser.email);
+        console.log("match requested by " + loggedInUser.email + " to " + document.getElementById("friend-name").value);
         const matchRequest = {
-            from:loggedInUser.uid,
-            fromId:loggedInUser.email,
-            to:"michael.dmitrienko@gmail.com",
+            from: loggedInUser.uid,
+            fromId: loggedInUser.email,
+            to: document.getElementById("friend-name").value.toLowerCase(),
             fromAddress: userData.address,
             fromLat: userData.addressLat,
             fromLong: userData.addressLong,
-            results:0,
-            toLat:0,
-            toLong:0
+            foodType: document.getElementById("food-type").value,
+            results: 0,
+            toLat: 0,
+            toLong: 0
         }
         console.log(matchRequest);
         matchCollectionRef.add(matchRequest);
     });
 }
 
-function addRequestButton(success){
-    if(success){
+function addRequestButton(success) {
+    if (success) {
         document.getElementById("submit").addEventListener("click", requestMatch);
     }
 }
