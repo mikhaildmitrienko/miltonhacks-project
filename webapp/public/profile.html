@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <script src="./js/sign_in.js"></script>
+    <script src="./js/animation.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://use.typekit.net/amg5vcb.css">
+
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="./css/header.css">
+
+    <script>
+        window.onload = function () {
+            initSignIn(
+                function (success) {
+                    initProfilePic(success);
+                    fillProfile(success);
+                }
+            );
+            profileAnimationInit();
+        }
+    </script>
+</head>
+
+<body>
+    <script>document.body.className += ' fade-out';</script>
+    <div class="profile-page">
+        <div class="header" id="navigation-top">
+            <h1 id="nav-title">Date Maker</h1>
+            <div class="nav-buttons">
+                <div class="container">
+                    <div class="nav-button" onclick="window.location.replace('discover.html')">Find a Place</div>
+                </div>
+                <div class="account-button" onclick="window.location.replace('profile.html')">
+                    <img id="profile-pic" hidden=true>
+                </div>
+            </div>
+        </div>
+        <div class="profile-content">
+            <div id="username">Sebastian Pork</div>
+            <div id="email">seb-ass-chin@gosuckadick.com</div>
+            <div id="address">69 High Street, Viet Nam, FU</div>
+            <div id="coordinates">(42.0420420,-69.696969)</div>
+            <div id="interests"></div>
+        </div>
+    </div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-firestore.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+             https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
+
+    <script src="js/firebaseCfg.js"></script>
+    <script src="js/profile_fill.js"></script>
+    <script src="js/links.js"></script>
+
+</body>
+
+</html>

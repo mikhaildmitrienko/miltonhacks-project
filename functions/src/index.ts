@@ -6,6 +6,7 @@ import * as admin from 'firebase-admin';
 // const cors = require('cors');
 // const bodyParser = require('body-parser');
 // const yelp_api = require('../server/utils/yelp');
+const request = require('request');
 
 admin.initializeApp();
 
@@ -27,14 +28,70 @@ admin.initializeApp();
 //   })
 
 
+const apiKey = 'h-1yi4jHs4kNaYbifUTJdVU4o7-qCBih--cCJgBnjY8a18ShGf_FRl0o_IwxUHt0VOHmXgV6ehSk5_Nx8ERhyHH08-Fbx1o1bDVQE-Ka0gTs_GF868Q95o-S6MvKXnYx';
+export const yelpRequest = functions.https.onRequest((req, res) => {
+    return fetch(`https://api.yelp.com/v3/businesses/search?&latitude=${req.query.longitude}&longitude=${req.query.latitude}`, {
+        headers: {
+            Authorization: `Bearer ${apiKey}`
+        }
+    }).then(response => {
+        res.status(201).send(response);
+    });
+})
+
+//Fake distance finder
+const restuarants1 = {
+    "McDonalds": 2,
+    "Wendy's": 3,
+    "Legal Seafood": 4
+};
+
+const restuarants2 = {
+    "McDonalds": 7,
+    "Wendy's": 3,
+    "Legal Seafood": 5
+};
+
+export const distance_finder = functions.https.onRequest((req, res) => {
+    if (req.query.id === '1') {
+        const matchDoc = {
+            'results':["McDonalds", "Wendy's", "Legal Sea Foods"],
+        }
+        return admin.firestore().collection('matches').add(matchDoc);
+        // res.send(JSON.stringify(restuarants1));
+    } else {
+        res.send(JSON.stringify(restuarants2));
+    }
+});
+
+
+
+export const distance = functions.https.onRequest((req, res) => {
+    request(`https://maps.googleapis.com/maps/api/directions/json?
+    origin=${req.query.user_latitude},${req.query.user_longitude}&
+    destination=${req.query.restuarant_latitude},${req.query.restuarant_longitude}&
+    key=AIzaSyA_jaJFyahK5tDzWsUVMUuWFwmCR6YUelE`, (err: any, inner_res: any, body: any) => {
+        if (err) {
+            console.log(err);
+        }
+        console.log(body)
+    }).then((jsonResponse: any) => {
+        const miles = jsonResponse['routes']['legs']['distance']['text'];
+        res.send(JSON.stringify(miles));
+    });
+});
+
+
 
 export const accountCreate = functions.auth.user().onCreate(user => {
     console.log(user.uid);
     const userDoc = {
         'email': user.email,
         'displayName': user.displayName,
-        'addressLat':'',
-        'addressLong':''
+        'address':'',
+        'addressLat': '',
+        'addressLong': '',
+        'interests': []
     }
     admin.firestore().collection('users').doc(user.uid)
         .set(userDoc).then(writeResult => {

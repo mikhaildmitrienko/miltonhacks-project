@@ -1,23 +1,33 @@
 var _provider;
+var loggedInUser;
 
 function initSignIn(onSignInFunc) {
     _provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            if (onSignInFunc) onSignInFunc();
+            loggedInUser = user;
+            if (onSignInFunc) onSignInFunc(true);
         } else {
             if (window.location.href.slice(-10) != "login.html") {
                 sessionStorage.lastURL = window.location.href;
                 window.location.replace(
                     "login.html"
                 );
-            }   
+            }
         }
     });
 }
 
-function initPageRedirect() {
-    
+function initSignInGentle(onSignInFunc) {
+    _provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            loggedInUser = user;
+            if (onSignInFunc) onSignInFunc(true);
+        } else {
+            if (onSignInFunc) onSignInFunc(false);
+        }
+    });
 }
 
 function signIn() {

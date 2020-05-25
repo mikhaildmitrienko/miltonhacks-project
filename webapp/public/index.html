@@ -18,8 +18,10 @@
     <link rel="stylesheet" type="text/css" href="./css/header.css">
 
     <script>
+        var loggedIn = false;
         window.onload = function() {
-            homeAnimationInit()
+            initSignInGentle(initProfilePic);
+            homeAnimationInit();
         }
     </script>
 </head>
@@ -31,8 +33,13 @@
         <div class="header" id="navigation-top">
             <h1 id="nav-title">Date Maker</h1>
             <div class="nav-buttons">
-                <div class="nav-button" onclick="window.location.replace('login.html')">Login</div>
-                <div class="nav-button">Find a Place</div>
+                <div class="container">
+                    <div class="nav-button" onclick="window.location.replace('login.html')" id="login-button">Login</div>
+                    <div class="nav-button" onclick="window.location.replace('discover.html')">Find a Place</div>
+                </div>
+                <div class="account-button" onclick="window.location.replace('profile.html')">
+                    <img id="profile-pic" hidden=true>
+                </div>
             </div>
         </div>
         <div class="content">
@@ -41,7 +48,11 @@
                 <h2 class="main-subtitle">A new way to plan dining</h2>
             </div>
             <div class="page-2">
-                <h1>Find a Restaurant</h1>
+                <h1>A New Way to Eat Together</h1>
+                <p>&emsp;&emsp;&emsp;&emsp;Have you ever struggled to pick a restaurant at which to meet? Are you frequently unable to make dining decisions for you and your friends? 
+                    Date Maker chooses the closest, high quality restaurants to you and your friends, eliminating the need for argument and indecision in times of hunger.
+                    Just enter the type of restaurant you feel like eating at and with whom you want to go and Date Maker does the rest! If you can't decide that either,
+                    Date Maker can pick randomly based on you and your friend's personal preferences!</p>
             </div>
         </div>
     </div>
@@ -56,6 +67,8 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
 
     <script src="js/firebaseCfg.js"></script>
+    <script src="js/links.js"></script>
+
 </body>
 
 </html>

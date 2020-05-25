@@ -49,7 +49,7 @@ body::-webkit-scrollbar {
 .header h1{
     top: 0;
     margin-top: 2px;
-    margin-left: 7vw;
+    margin-left: 9vw;
     cursor:pointer;
 }
 
@@ -61,7 +61,7 @@ body::-webkit-scrollbar {
     left: 0%; */
     /* background-image: linear-gradient(to bottom right, #f4c4f3,#fc67fa); */
     /* background-image: url("../img/restaurant.jpg"); */        
-    background-image: url("../img/fuckkkkk.svg");
+    background-image: url("../img/fuckkkkkk.svg");
     background-size: auto 200%;
     background-repeat:no-repeat;
     
@@ -71,20 +71,25 @@ body::-webkit-scrollbar {
 }
 
 .page-1 h1{
-    margin: 30vh 35vw;
+    margin: 30vh 50vw;
     width: 100vw;
     font-size: 2.8rem;
 }
 
 .page-1 h2{
-    margin: -25vh 50vw;
+    margin: -25vh 60vw;
     width: 100vw;
 }
 
 .nav-buttons{
     /* margin-top: 8px; */
-    margin-right: 10vw;
     display: flex;
+    justify-content: space-between;
+}
+
+.nav-buttons .container {
+    display: flex;
+    margin-right: 1vw;
 }
 
 .nav-button {
@@ -127,7 +132,15 @@ body::-webkit-scrollbar {
     color: white;
 }
 .page-2 h1{
-    margin: 26vh 10vw;
+    margin: 18vh 20vw;
+}
+
+.page-2 p{
+    position: absolute;
+    width: 50vw;
+    left: 50vw;
+    top: 30vh;
+    transform: translateX(-50%);
 }
 /* 
 .content{
@@ -165,3 +178,202 @@ body::-webkit-scrollbar {
 .google-login-logo{
     margin-right:20px;
 }
+.account-button img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-right: 3vw;
+}
+
+.account-button {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+
+}
+
+.profile-page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/fuckkkkkkk.svg");
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-position-x: right;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.profile-content{
+    position: absolute;
+    top: 30vh;
+    left: 30vw;
+    transform: translate(-50%,-50%);
+    text-align: left;
+    font-family: 'Poppins';
+    border-width: 1px 1px;
+    padding: 50px;
+}
+
+#username{
+    font-weight: 700;
+    font-size: 30px;
+    margin: 25px 0
+}
+
+#email{
+    margin: 15px 0;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+#address{
+    font-weight: 500;
+    font-size: 20px;
+    margin-top: 15px;
+    border-radius: 10px;
+}
+
+#coordinates{
+    margin-bottom: 15px;
+    font-size: 12px;
+}
+
+.interest{
+    margin-top: 15px;
+    margin-right: 10px;
+}
+
+.wrap-input100 {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    margin-bottom: 10px;
+  }
+  
+  .input100 {
+    font-family: Poppins-Medium;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #666666;
+  
+    display: block;
+    width: 100%;
+    background: #e6e6e6;
+    height: 50px;
+    border-radius: 25px;
+    padding: 0 30px 0 68px;
+  }
+  
+  
+  /*------------------------------------------------------------------
+  [ Focus ]*/
+  .focus-input100 {
+    display: block;
+    position: absolute;
+    border-radius: 25px;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0px 0px 0px 0px;
+    color: rgba(87,184,70, 0.8);
+  }
+  
+  .input100:focus + .focus-input100 {
+    -webkit-animation: anim-shadow 0.5s ease-in-out forwards;
+    animation: anim-shadow 0.5s ease-in-out forwards;
+  }
+  
+  @-webkit-keyframes anim-shadow {
+    to {
+      box-shadow: 0px 0px 70px 25px;
+      opacity: 0;
+    }
+  }
+  
+  @keyframes anim-shadow {
+    to {
+      box-shadow: 0px 0px 70px 25px;
+      opacity: 0;
+    }
+  }
+  
+  .symbol-input100 {
+    font-size: 15px;
+  
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    border-radius: 25px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-left: 35px;
+    pointer-events: none;
+    color: #666666;
+  
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+  }
+  
+  .input100:focus + .focus-input100 + .symbol-input100 {
+    color: #57b846;
+    padding-left: 28px;
+  }
+  
+  /*------------------------------------------------------------------
+  [ Button ]*/
+  .container-login100-form-btn {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+  }
+  
+  .login100-form-btn {
+    font-family: Montserrat-Bold;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #fff;
+    text-transform: uppercase;
+  
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    background: #57b846;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 25px;
+  
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+  }
+  
+  .login100-form-btn:hover {
+    background: #333333;
+  }
