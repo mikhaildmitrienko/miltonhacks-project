@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,12 +24,15 @@
             initSignIn(
                 function (success) {
                     initProfilePic(success);
+                    // getResult(success);
+                    addRequestButton(success);
                 }
             );
             profileAnimationInit();
         }
     </script>
 </head>
+
 <body>
     <div class="discover-page">
         <div class="header" id="navigation-top">
@@ -42,25 +46,13 @@
                 </div>
             </div>
         </div>
-        <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-            <input class="input100" type="text" name="email" placeholder="Email">
-            <span class="focus-input100"></span>
-            <span class="symbol-input100">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-            </span>
-        </div>
-
-        <div class="wrap-input100 validate-input" data-validate = "Password is required">
-            <input class="input100" type="password" name="pass" placeholder="Password">
-            <span class="focus-input100"></span>
-            <span class="symbol-input100">
-                <i class="fa fa-lock" aria-hidden="true"></i>
-            </span>
-        </div>
-        <div class="container-login100-form-btn">
-            <button class="login100-form-btn">
-                Login
-            </button>
+        <h1 id="title">Discover</h1>
+        <div class="container" id="replaceable">
+            <div class="form">
+                <input type="text" name="food-type" placeholder="What do you feel like eating?">
+                <input type="text" name="friend-name" placeholder="Who do you want to eat with?">
+                <button class="submit" id="submit">Submit</button>
+            </div>
         </div>
     </div>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -74,6 +66,8 @@
 
     <script src="js/firebaseCfg.js"></script>
     <script src="js/profile_fill.js"></script>
+    <script src="js/result.js"></script>
     <script src="js/links.js"></script>
 </body>
+
 </html>

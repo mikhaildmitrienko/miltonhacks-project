@@ -1,5 +1,8 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+// import * as yelp_fusion from 'yelp-fusion';
+
+// const yelp_api = require('yelp-fusion');
 
 // const functions = require('firebase-functions');
 // const express = require('express');
@@ -27,17 +30,99 @@ admin.initializeApp();
 //     });
 //   })
 
+// const apiKey = 'h-1yi4jHs4kNaYbifUTJdVU4o7-qCBih--cCJgBnjY8a18ShGf_FRl0o_IwxUHt0VOHmXgV6ehSk5_Nx8ERhyHH08-Fbx1o1bDVQE-Ka0gTs_GF868Q95o-S6MvKXnYx';
+// export const yelpRequest = functions.https.onRequest((req, res) => {
+//     return fetch(`https://api.yelp.com/v3/businesses/search?&latitude=${req.query.longitude}&longitude=${req.query.latitude}`, {
+//         headers: {
+//             Authorization: `Bearer ${apiKey}`
+//         }
+//     }).then(response => {
+//         res.status(201).send(response);
+//     });
+// })
 
-const apiKey = 'h-1yi4jHs4kNaYbifUTJdVU4o7-qCBih--cCJgBnjY8a18ShGf_FRl0o_IwxUHt0VOHmXgV6ehSk5_Nx8ERhyHH08-Fbx1o1bDVQE-Ka0gTs_GF868Q95o-S6MvKXnYx';
-export const yelpRequest = functions.https.onRequest((req, res) => {
-    return fetch(`https://api.yelp.com/v3/businesses/search?&latitude=${req.query.longitude}&longitude=${req.query.latitude}`, {
-        headers: {
-            Authorization: `Bearer ${apiKey}`
+// const apiKey = 'h-1yi4jHs4kNaYbifUTJdVU4o7-qCBih--cCJgBnjY8a18ShGf_FRl0o_IwxUHt0VOHmXgV6ehSk5_Nx8ERhyHH08-Fbx1o1bDVQE-Ka0gTs_GF868Q95o-S6MvKXnYx';
+
+
+
+// export const yelpRequest = functions.https.onRequest((req, res) => {
+
+//     var uid = req.query.uid?.toString;
+
+//     if (uid != undefined) {
+//         var searchRequest = {};
+
+//         admin.firestore().collection('users')
+//             .doc(uid).get().then((userData: any) => {
+//                 if (userData && userData.exists) {
+//                     searchRequest = {
+//                         latitude: userData.data()['addressLat'],
+//                         longitude: userData.data()['addressLong']
+//                     }
+//                 }
+//             }
+//             );
+
+//         const client = yelp_fusion.client(apiKey);
+//         client.search(searchRequest).then((response: any) => {
+//             const firstResult = response.jsonBody.businesses[0];
+//             const prettyJson = JSON.stringify(firstResult, null, 4);
+//             console.log(prettyJson);
+//         }).catch((e: any) => {
+//             console.log(e);
+//         });
+//     }
+// })
+
+export const yelpDocRequest = functions.firestore
+    .document('matches/{matchID}')
+    .onCreate((snapshot, context) => {
+        const matchData = snapshot.data();
+        if (matchData) {
+            admin.firestore().collection("users")
+                .where("email", "==", matchData.to).limit(1).get()
+                .then((toSnapshot) => {
+                    if (!toSnapshot.empty) {
+                        return snapshot.ref.update({
+                            results: 20,
+                            toLat: toSnapshot.docs[0].data().addressLat,
+                            toLong: toSnapshot.docs[0].data().addressLong
+                        });
+                        // getRestaurants(matchData.fromLat, matchData.fromLong, toSnapshot.addressLat, toSnapshot.addressLong);
+                    }
+                    else {
+                        return snapshot.ref.update({
+                            results: 30,
+                            to:'error_in_cloud_functions_94@gmail.com'
+                        });
+                    }
+                
+                })
+                .catch(err => {
+                    console.log(err);
+                    return snapshot.ref.update({
+                        results: 30,
+                        to:'error_in_cloud_functions_103@gmail.com'
+                    });
+                });
+                // return snapshot.ref.update({
+                //     results: 30,
+                //     to:'error_in_cloud_functions_108@gmail.com'
+                // });
         }
-    }).then(response => {
-        res.status(201).send(response);
-    });
-})
+        else {
+            return null;
+        }
+        return null;
+    }
+    );
+
+// function getRestaurants(person1lat, person1long, person2lat, person2long) {
+
+// }
+
+
+
 
 //Fake distance finder
 const restuarants1 = {
@@ -53,15 +138,18 @@ const restuarants2 = {
 };
 
 export const distance_finder = functions.https.onRequest((req, res) => {
+
+    const matchDoc = {
+        'results': ["McDonalds", "Wendy's", "Legal Sea Foods"],
+    }
+
     if (req.query.id === '1') {
-        const matchDoc = {
-            'results':["McDonalds", "Wendy's", "Legal Sea Foods"],
-        }
-        return admin.firestore().collection('matches').add(matchDoc);
-        // res.send(JSON.stringify(restuarants1));
+        res.send(JSON.stringify(restuarants1));
     } else {
         res.send(JSON.stringify(restuarants2));
     }
+
+    return admin.firestore().collection('matches').add(matchDoc);
 });
 
 
@@ -88,7 +176,7 @@ export const accountCreate = functions.auth.user().onCreate(user => {
     const userDoc = {
         'email': user.email,
         'displayName': user.displayName,
-        'address':'',
+        'address': '',
         'addressLat': '',
         'addressLong': '',
         'interests': []
