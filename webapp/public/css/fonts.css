@@ -17,6 +17,14 @@ h2 {
     user-select: none; /* Standard */
 }
 
+.get-started{
+    font-family: 'Poppins', sans-serif;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
 p {
     font-family: 'Poppins', sans-serif;
     font-weight: 500;

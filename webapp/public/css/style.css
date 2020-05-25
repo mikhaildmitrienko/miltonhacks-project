@@ -81,6 +81,28 @@ body::-webkit-scrollbar {
     width: 100vw;
 }
 
+.page-1 .get-started{
+    margin: 28vh 70vw;
+    width: 100vw;
+    font-family: 'Poppins';
+    cursor: pointer;
+}
+
+.page-1 .get-started:hover::after{
+    content: '→';
+    display: inline-block;
+    height: 20px;
+    width:20px;
+    color: black !important;
+    position: relative;
+    /* background: black; */
+    /* background-color: black; */
+    transform: translate(-50%, 7.3%);
+    /* top:0; */
+    right: -10px;
+    font-family: 'Poppins';
+}
+
 .nav-buttons{
     /* margin-top: 8px; */
     display: flex;
@@ -275,14 +297,15 @@ body::-webkit-scrollbar {
     margin-right: 10px;
     padding: 10px;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 100vw;
     width: 70px;
     text-align: center;
     transition: all ease-in-out .2s;
 }
 
 #sign-out:hover{
-    background-color: rgb(255, 168, 252);
+    color: white;
+    background-color: rgb(255, 60, 196);
 }
 
 .discover-page {
