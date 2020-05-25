@@ -12,6 +12,25 @@
   "hosting": {
     "public": "webapp/public",
     "cleanUrls": true,
+    "rewrites": [
+      {
+        "source": "/",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/login",
+        "destination": "/login.html"
+      },
+      {
+        "source": "/profile",
+        "destination": "/profile.html"
+      },
+      {
+        "source": "/discover",
+        "destination": "/discover.html"
+      }
+
+    ],
     "ignore": [
       "firebase.json",
       "**/.*",
