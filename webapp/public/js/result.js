@@ -36,22 +36,21 @@ function getResult(success) {
     }
 }
 
-function returnResult() {
+function returnResult(resultList, person) {
     document.getElementById("title").innerHTML = "";
+    document.getElementsByClassName("discover-page")[0].style.backgroundImage = "url(img/fuckkkkkkkk.svg)";
+    // document.getElementsByClassName("discover-page")[0].style.height = "200%";
     document.getElementById("replaceable").innerHTML =
-        '<div class="account-button" onclick="window.location.replace(' +
-        "'profile.html')" +
-        '">' +
-        '<img id="profile-pic" hidden=true>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '<div class="profile-content">' +
-        '<div id="username">Result</div>' +
-        `<div id="email">Eating with Aaron Lockhart</div>` +
-        '<div id="address">Your best bets are</div>' +
-        '<div id="interests">Wendys, McDonalds, Legal Sea Foods</div>' +
-        '</div>';
+        '<div class="result-content">' +
+        '<div id="result-title">Result</div>' +
+        `<div id="eating-with">Eating with ${person}</div>` +
+        '<div id="best-bets">Your best bets are</div>' +
+        '<div id="restaurant-list">';
+    resultList.forEach((item) => {
+        document.getElementById("restaurant-list").innerHTML += `<div id = "restaurant-result"> <img src="${item.restaurant.thumb}" class="result-img">${item.restaurant.name} (${item.restaurant.user_rating.aggregate_rating}🌟)</div>`;
+    })
+    document.getElementById("replaceable").innerHTML += '</div></div>';
+
 }
 
 function requestMatch() {
@@ -71,10 +70,51 @@ function requestMatch() {
             results: 0,
             toLat: 0,
             toLong: 0
-        }
+        };
+        fetch(`https://us-central1-miltonhacksii.cloudfunctions.net/getMidpoint?lat=${userData.addressLat}&long=${userData.addressLong}&toMail=${document.getElementById("friend-name").value.toLowerCase()}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                getZomatoRequest(document.getElementById("food-type").value,
+                    data.lat,
+                    data.long,
+                    matchRequest.to
+                );
+            })
+
         console.log(matchRequest);
         matchCollectionRef.add(matchRequest);
     });
+
+}
+
+function getZomatoRequest(keyword, lat, long, friend) {
+    const requestUrl = `https://developers.zomato.com/api/v2.1/search?q=${keyword}&lat=${lat}&lon=${"-71.1212"}&radius=1609&sort=rating&order=desc`;
+
+    var result = ["not queried"];
+
+    const userKey = 'c300606e72cc7a23491dd6a0b424b1f1';
+
+    fetch(requestUrl, {
+        method: 'GET', // or 'PUT'
+        headers: {
+            'user-key': userKey,
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data);
+            // result = JSON.parse(data).restaurants;
+            console.log('Success:', data);
+            var listOfRestaurants = data.restaurants.slice(0, 5);
+            returnResult(listOfRestaurants, friend);
+        })
+        .catch((error) => {
+            result = ["error"];
+            console.error('Error:', error);
+            var listOfRestaurants = result;
+            returnResult(listOfRestaurants, friend);
+        });
 }
 
 function addRequestButton(success) {

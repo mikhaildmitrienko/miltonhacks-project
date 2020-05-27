@@ -44,3 +44,11 @@ p {
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
 }
+
+.result-content{
+    font-family: 'Poppins', sans-serif;
+}
+
+#restaurant-result{
+    font-family: 'Poppins', sans-serif;
+}

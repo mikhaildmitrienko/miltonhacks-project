@@ -288,9 +288,58 @@ body::-webkit-scrollbar {
     padding:10px;
 }
 
-.interest{
-    margin-top: 15px;
-    margin-right: 10px;
+.result-content{
+    position: absolute;
+    top: 20vh;
+    left: 30vw;
+    transform: translate(-50%,-0%);
+    text-align: left;
+    /* font-family: 'Poppins'; */
+    border-width: 1px 1px;
+    padding: 30px;
+    border: solid rgb(206, 206, 206);
+    border-width: 1px 1px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+
+.result-img{
+    height: 20px;
+}
+
+#result-title{
+    font-weight: 700;
+    font-size: 30px;
+    margin: 5px 10px;
+}
+
+#eating-with{
+    font-weight: 500;
+    font-size: 20px;
+    padding: 10px;
+}
+
+#best-bets{
+    font-weight: 500;
+    font-size: 20px;
+    margin-top: 0px;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: left;
+}
+
+#restaurant-list{
+    padding:10px;
+}
+
+#restaurant-result{
+    margin: 10px;
+    padding: 10px;
+    background-color: #d8d8d8;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 10vw;
 }
 
 #sign-out{
@@ -312,8 +361,12 @@ body::-webkit-scrollbar {
     position: absolute;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
     z-index: -1;
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* background-image:  */
 }
 
 .discover-page #title{

@@ -7,7 +7,7 @@ const yelp = require('yelp-fusion');
 
 // const functions = require('firebase-functions');
 // const express = require('express');
-// const cors = require('cors');
+const cors = require('cors')({ origin: true });
 // const bodyParser = require('body-parser');
 // const yelp_api = require('../server/utils/yelp');
 const request = require('request');
@@ -53,16 +53,16 @@ admin.initializeApp();
 //     if (uid != undefined) {
 //         var searchRequest = {};
 
-//         admin.firestore().collection('users')
-//             .doc(uid).get().then((userData: any) => {
-//                 if (userData && userData.exists) {
-//                     searchRequest = {
-//                         latitude: userData.data()['addressLat'],
-//                         longitude: userData.data()['addressLong']
-//                     }
-//                 }
+// admin.firestore().collection('users')
+//     .doc(uid).get().then((userData: any) => {
+//         if (userData && userData.exists) {
+//             searchRequest = {
+//                 latitude: userData.data()['addressLat'],
+//                 longitude: userData.data()['addressLong']
 //             }
-//             );
+//         }
+//     }
+//     );
 
 //         const client = yelp_fusion.client(apiKey);
 //         client.search(searchRequest).then((response: any) => {
@@ -75,6 +75,43 @@ admin.initializeApp();
 //     }
 // })
 
+export const getMidpoint = functions.https.onRequest((req, res) => {
+    cors(req, res, () => {
+        var result = {};
+        admin.firestore().collection("users")
+            .where("email", "==", req.query.toMail).limit(1).get()
+            .then((toSnapshot) => {
+                if (!toSnapshot.empty && req.query.lat != undefined) {
+                    const midLat = (Number(req.query.lat) + Number(toSnapshot.docs[0].data().addressLat)) / 2;
+                    const midLong = (Number(req.query.long) + Number(toSnapshot.docs[0].data().addressLong)) / 2;
+                    result = {
+                        lat: midLat,
+                        long: midLong
+                    };
+                    res.status(200).json(result);
+                }
+                else {
+                    result = {
+                        lat: req.query.lat,
+                        long: req.query.long,
+                        err: "toUserNotFound; snapshot empty"
+                    };
+                    res.status(200).json(result);
+                }
+
+            })
+            .catch(err => {
+                console.log(err);
+                result = {
+                    lat: req.query.lat,
+                    long: req.query.long,
+                    err: "toUserNotFound, line 105"
+                };
+                res.status(200).json(result);
+            });
+    });
+});
+
 export const yelpDocRequest = functions.firestore
     .document('matches/{matchID}')
     .onCreate((snapshot, context) => {
@@ -85,18 +122,21 @@ export const yelpDocRequest = functions.firestore
                 .then((toSnapshot) => {
                     if (!toSnapshot.empty) {
                         const returnedRestaurant = getYelpRequest(matchData.foodType, matchData.fromLat, matchData.fromLong);
+                        console.log(returnedRestaurant);
+                        const returnedRestaurants = getZomatoRequest(matchData.foodType, matchData.fromLat, matchData.fromLong);
                         return snapshot.ref.update({
-                            results: 20,
+                            // results: 20,
                             toLat: toSnapshot.docs[0].data().addressLat,
                             toLong: toSnapshot.docs[0].data().addressLong,
-                            restaurants: returnedRestaurant
+                            restaurants: returnedRestaurants,
+                            results: returnedRestaurants.length,
                         });
                         // getRestaurants(matchData.fromLat, matchData.fromLong, toSnapshot.addressLat, toSnapshot.addressLong);
                     }
                     else {
                         return snapshot.ref.update({
                             results: 30,
-                            to: 'error_in_cloud_functions_94@gmail.com'
+                            err_message: 'error_in_cloud_functions_94: user not available'
                         });
                     }
 
@@ -105,7 +145,7 @@ export const yelpDocRequest = functions.firestore
                     console.log(err);
                     return snapshot.ref.update({
                         results: 30,
-                        to: 'error_in_cloud_functions_103@gmail.com'
+                        err_message: 'error_in_cloud_functions_103'
                     });
                 });
             return snapshot.ref.update({
@@ -125,6 +165,52 @@ export const yelpDocRequest = functions.firestore
 // }
 
 const apiKey = 'h-1yi4jHs4kNaYbifUTJdVU4o7-qCBih--cCJgBnjY8a18ShGf_FRl0o_IwxUHt0VOHmXgV6ehSk5_Nx8ERhyHH08-Fbx1o1bDVQE-Ka0gTs_GF868Q95o-S6MvKXnYx';
+
+
+const userKey = 'c300606e72cc7a23491dd6a0b424b1f1';
+// function getZomatoRequest(keyword: String, lat: String, long: String) {
+//     const requestUrl = `https://developers.zomato.com/api/v2.1/search?q=${keyword}&lat=${lat}&lon=${long}&radius=1609&sort=rating&order=desc`;
+
+//     var result = ["not queried"];
+
+//     fetch(requestUrl, {
+//         method: 'POST', // or 'PUT'
+//         headers: {
+//             'user-key': userKey,
+//         },
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//             result = JSON.parse(data).restaurants;
+//             console.log('Success:', data);
+//         })
+//         .catch((error) => {
+//             result = ["error"];
+//             console.error('Error:', error);
+//         });
+//     return result;
+// }
+
+function getZomatoRequest(keyword: String, lat: String, long: String) {
+    var result = ["API not queried"];
+    const options = {
+        url: `https://developers.zomato.com/api/v2.1/search?q=${keyword}&lat=${lat}&lon=${long}&radius=1609&sort=rating&order=desc`,
+        headers: {
+            'user-key': userKey,
+        }
+    };
+    function callback(error: any, response: any, body: any) {
+        if (!error && response.statusCode == 200) {
+            result = JSON.parse(body);
+        }
+        else {
+            result = [error];
+        }
+    }
+    request(options, callback);
+
+    return result;
+}
 
 function getYelpRequest(keyword: String, lat: String, long: String) {
     const searchRequest = {
@@ -161,7 +247,7 @@ const restuarants2 = {
     "Wendy's": 3,
     "Legal Seafood": 5
 };
-
+// https://us-central1-miltonhacksii.cloudfunctions.net/distance_finder?id=1
 export const distance_finder = functions.https.onRequest((req, res) => {
 
     const matchDoc = {

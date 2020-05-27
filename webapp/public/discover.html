@@ -59,6 +59,20 @@
     <script src="js/profile_fill.js"></script>
     <script src="js/result.js"></script>
     <script src="js/links.js"></script>
+
+    <script>
+        window.onscroll = function () { scrollFunction(); };
+    function scrollFunction() {
+        var navTop = document.getElementById("navigation-top").style;
+        var scrollTop = document.documentElement.scrollTop;
+        if (scrollTop / window.innerHeight >= 0.01) {
+            navTop.backgroundColor = "#ffffff";
+        }
+        else {
+            navTop.backgroundColor = "transparent";
+        }
+    }
+    </script>
 </body>
 
 </html>

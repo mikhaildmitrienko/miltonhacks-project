@@ -18,13 +18,33 @@ function fillProfile(loggedIn) {
                     if (e.keyCode === 13) {
                         e.preventDefault();
                         addressField.contentEditable = 'false';
+                        enterToSubmit.style.color = "black";
+                        enterToSubmit.innerHTML = "Press Enter to Submit"
                         enterToSubmit.style.opacity = 0;
-                        docRef.update({
-                            address: addressField.innerHTML
-                        });
+                        const requestLink = `https://public.opendatasoft.com/api/records/1.0/search/?dataset=us-zip-code-latitude-and-longitude&q=${addressField.innerHTML}&facet=state&facet=timezone&facet=dst`
+                        fetch(requestLink)
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data);
+                                const resLat = data.records[0].fields.latitude;
+                                const resLong = data.records[0].fields.longitude;
+                                document.getElementById("coordinates").innerHTML = '(' + resLat + ', ' + resLong + ')';
+                                docRef.update({
+                                    address: addressField.innerHTML,
+                                    addressLong: resLong,
+                                    addressLat: resLat
+                                });
+                            }).catch((err) => {
+                                enterToSubmit.style.opacity = 1;
+                                enterToSubmit.style.color = "red";
+                                enterToSubmit.innerHTML = "Please enter a valid zipcode."
+                                console.log(err);
+                            }
+                            );
+
                     }
                 });
-                addressField.addEventListener('click', function (){
+                addressField.addEventListener('click', function () {
                     addressField.contentEditable = 'true';
                     enterToSubmit.style.opacity = 1;
                 });
@@ -33,14 +53,14 @@ function fillProfile(loggedIn) {
     }
 }
 
-function signOut(){
-    firebase.auth().signOut().then(function() {
-      }, function(error) {
-      });
+function signOut() {
+    firebase.auth().signOut().then(function () {
+    }, function (error) {
+    });
 }
 
-function makeSignOutButton(success){
-    document.getElementById("sign-out").addEventListener("click",()=>{
+function makeSignOutButton(success) {
+    document.getElementById("sign-out").addEventListener("click", () => {
         signOut();
     })
 }
