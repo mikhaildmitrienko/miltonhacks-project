@@ -306,6 +306,8 @@ body::-webkit-scrollbar {
 
 .result-img{
     height: 20px;
+    border-radius: 100%;
+    margin-right: 20px;
 }
 
 #result-title{

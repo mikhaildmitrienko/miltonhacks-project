@@ -89,7 +89,9 @@ function requestMatch() {
 }
 
 function getZomatoRequest(keyword, lat, long, friend) {
-    const requestUrl = `https://developers.zomato.com/api/v2.1/search?q=${keyword}&lat=${lat}&lon=${"-71.1212"}&radius=1609&sort=rating&order=desc`;
+    const requestUrl = `https://developers.zomato.com/api/v2.1/search?q=${keyword}&lat=${lat}&lon=${"-71.16687999999999"}&radius=1609&sort=rating&order=desc`;
+
+    console.log(requestUrl);
 
     var result = ["not queried"];
 
