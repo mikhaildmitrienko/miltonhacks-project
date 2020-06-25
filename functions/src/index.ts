@@ -14,67 +14,6 @@ const request = require('request');
 
 admin.initializeApp();
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
-
-// export const yelpRequest = functions.https.onRequest((req, res) => {
-//     return fetch(`https://api.yelp.com/v3/businesses/search?term=${term}&location=${location}&sort_by=${sortBy}`, {
-//       headers: {
-//         Authorization: `Bearer ${apiKey}`
-//       }
-//     }).then(response => {
-//       res.status(201).send(response);
-//     });
-//   })
-
-// const apiKey = 'h-1yi4jHs4kNaYbifUTJdVU4o7-qCBih--cCJgBnjY8a18ShGf_FRl0o_IwxUHt0VOHmXgV6ehSk5_Nx8ERhyHH08-Fbx1o1bDVQE-Ka0gTs_GF868Q95o-S6MvKXnYx';
-// export const yelpRequest = functions.https.onRequest((req, res) => {
-//     return fetch(`https://api.yelp.com/v3/businesses/search?&latitude=${req.query.longitude}&longitude=${req.query.latitude}`, {
-//         headers: {
-//             Authorization: `Bearer ${apiKey}`
-//         }
-//     }).then(response => {
-//         res.status(201).send(response);
-//     });
-// })
-
-// const apiKey = 'h-1yi4jHs4kNaYbifUTJdVU4o7-qCBih--cCJgBnjY8a18ShGf_FRl0o_IwxUHt0VOHmXgV6ehSk5_Nx8ERhyHH08-Fbx1o1bDVQE-Ka0gTs_GF868Q95o-S6MvKXnYx';
-
-
-
-// export const yelpRequest = functions.https.onRequest((req, res) => {
-
-//     var uid = req.query.uid?.toString;
-
-//     if (uid != undefined) {
-//         var searchRequest = {};
-
-// admin.firestore().collection('users')
-//     .doc(uid).get().then((userData: any) => {
-//         if (userData && userData.exists) {
-//             searchRequest = {
-//                 latitude: userData.data()['addressLat'],
-//                 longitude: userData.data()['addressLong']
-//             }
-//         }
-//     }
-//     );
-
-//         const client = yelp_fusion.client(apiKey);
-//         client.search(searchRequest).then((response: any) => {
-//             const firstResult = response.jsonBody.businesses[0];
-//             const prettyJson = JSON.stringify(firstResult, null, 4);
-//             console.log(prettyJson);
-//         }).catch((e: any) => {
-//             console.log(e);
-//         });
-//     }
-// })
-
 export const getMidpoint = functions.https.onRequest((req, res) => {
     cors(req, res, () => {
         var result = {};
@@ -160,36 +99,10 @@ export const yelpDocRequest = functions.firestore
     }
     );
 
-// function getRestaurants(person1lat, person1long, person2lat, person2long) {
-
-// }
-
-const apiKey = 'h-1yi4jHs4kNaYbifUTJdVU4o7-qCBih--cCJgBnjY8a18ShGf_FRl0o_IwxUHt0VOHmXgV6ehSk5_Nx8ERhyHH08-Fbx1o1bDVQE-Ka0gTs_GF868Q95o-S6MvKXnYx';
 
 
-const userKey = 'c300606e72cc7a23491dd6a0b424b1f1';
-// function getZomatoRequest(keyword: String, lat: String, long: String) {
-//     const requestUrl = `https://developers.zomato.com/api/v2.1/search?q=${keyword}&lat=${lat}&lon=${long}&radius=1609&sort=rating&order=desc`;
 
-//     var result = ["not queried"];
 
-//     fetch(requestUrl, {
-//         method: 'POST', // or 'PUT'
-//         headers: {
-//             'user-key': userKey,
-//         },
-//     })
-//         .then(response => response.json())
-//         .then(data => {
-//             result = JSON.parse(data).restaurants;
-//             console.log('Success:', data);
-//         })
-//         .catch((error) => {
-//             result = ["error"];
-//             console.error('Error:', error);
-//         });
-//     return result;
-// }
 
 function getZomatoRequest(keyword: String, lat: String, long: String) {
     var result = ["API not queried"];
